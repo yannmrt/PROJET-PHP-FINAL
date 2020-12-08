@@ -33,9 +33,9 @@ function createUser($nom, $prenom, $email, $mdp, $confirmMdp, $sql) {
 
                 header("Location: login.php");
 
-            } else { $error = "Vos mots de passe ne correspondent pas"; return $error; }
-        } else { $error = "Veuillez entrer une adresse email valide"; return $error; }
-    } else { $error = "Tous les champs doivent être complétés"; return $error; }
+            } else { $error = "Vos mots de passe ne correspondent pas"; }
+        } else { $error = "Veuillez entrer une adresse email valide"; }
+    } else { $error = "Tous les champs doivent être complétés"; }
 
     return $error;
     
