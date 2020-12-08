@@ -1,5 +1,6 @@
 <?php 
 
+// On importe la configuration du site
 require_once('config.php');
 
 try {

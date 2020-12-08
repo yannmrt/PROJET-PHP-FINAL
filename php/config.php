@@ -10,7 +10,7 @@ $_INFO = array(
 $_DB = array(
 
     "host" => "localhost",
-    "name" => "projetphp",
-    "user" => "root",
-    "pass" => ""
+    "name" => "phpfinal",
+    "user" => "pi",
+    "pass" => "raspberry"
 );

@@ -9,3 +9,20 @@ function reqUser($id) {
     }
 
 }
+
+function createUser() {
+
+}
+
+function loginUser() {
+
+}
+
+function settingUser() {
+
+}
+
+function addProduct() {
+
+}
+
