@@ -17,8 +17,15 @@ function getError($error) {
 
 }
 
-// Permet de créer un user avec le Nom, Prénom, Mot de passe, la confirmation du mot de passe et la variable de connexion à la base de donnée
-function createUser($nom, $prenom, $email, $mdp, $confirmMdp, $sql) {
+// Cette fonction permet de déconnecter l'utilisateur
+function logoutUser() {
+    $_SESSION = array();
+    session_destroy();
+
+}
+
+// Permet de créer un user avec le Nom, Prénom, Mot de passe, si la case accepter les cgu est cochée et la confirmation du mot de passe et la variable de connexion à la base de donnée
+function createUser($nom, $prenom, $email, $mdp, $confirmMdp, $acceptCgu, $sql) {
     $nom = htmlspecialchars($nom);
     $prenom = htmlspecialchars($prenom);
     $email = htmlspecialchars($email);
@@ -54,7 +61,7 @@ function loginUser($email, $mdp, $sql) {
 
             if($userExist > 0) {
                 $_USER = $checkUser->fetch();
-                $_SESSION['userId'] = $_USER['userId'];
+                $_SESSION['idUser'] = $_USER['idUser'];
                 $_SESSION['nom'] = $_USER['nom'];
                 $_SESSION['prenom'] = $_USER['prenom'];
                 $_SESSION['email'] = $_USER['email'];
@@ -67,6 +74,15 @@ function loginUser($email, $mdp, $sql) {
 
     return $error;
 
+}
+
+// Dans cette fonction nous 
+function headerCategory($sql) {
+    $reqCategory = $sql->query("SELECT * FROM productCategory");
+    
+    while($category = $reqCategory->fetch()) {
+        echo '<li class="nav-item"><a class="nav-link" href="#" aria-haspopup="true" aria-expanded="false">' . $category["nom"] . '</a></li>';
+    }
 }
 
 function settingUser() {

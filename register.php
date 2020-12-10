@@ -69,7 +69,7 @@ if(isset($_POST['valider'])) {
                                     </div>
                                     <div class="form-group">
                                         <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" name="acceptCgu" required>
+                                            <input type="checkbox" class="form-check-input" name="acceptCgu" value="1" required>
                                             <label for="agree" class="form-check-label ml-2">J'accepte les conditions d'utilisation</label>
                                         </div>
                                     </div>
