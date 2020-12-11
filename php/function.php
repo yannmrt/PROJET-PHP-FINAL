@@ -134,7 +134,7 @@ function headerCategory($sql) {
 function infoProduct($idProduct, $sql) {
     $reqProduct = $sql->prepare("SELECT * FROM product WHERE idProduct = ?");
     $reqProduct->execute(array($idProduct));
-    $productExist = $reqProduct->rowCount();
+    $productExist = $reqProduct->rowCount();;
 
     if($productExist > 0) {
         $product = $reqProduct->fetch();
