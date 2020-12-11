@@ -5,7 +5,7 @@ require_once("function.php");
 // Configuration du site web 
 $_INFO = array(
 
-    "name" => "Essai"
+    "nom" => "ECOM"
 );
 
 // Configuration de la base de donnée
