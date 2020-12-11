@@ -98,6 +98,7 @@ function editUser($nom, $prenom, $email, $sql) {
         if($email != $_SESSION["email"]) {
             $editEmail = $sql->prepare("UPDATE user SET email = ? WHERE idUser = ?");
             $editEmail->execute(array($email, $_SESSION["idUser"]));
+            $_SESSION["email"] = $email;
         }
     }
 }
