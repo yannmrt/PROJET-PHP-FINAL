@@ -76,7 +76,53 @@ function loginUser($email, $mdp, $sql) {
 
 }
 
-// Dans cette fonction nous 
+// Cette fonction permet de modifier les informations du compte de l'utilisateur
+function editUser($nom, $prenom, $email, $sql) {
+    $nom = htmlspecialchars($nom);
+    $prenom = htmlspecialchars($prenom);
+    $email = htmlspecialchars($email);
+
+    if(!empty($nom) AND !empty($prenom) AND !empty($email)) {
+        if($nom != $_SESSION["nom"]) {
+            $editNom = $sql->prepare("UPDATE user SET nom = ? WHERE idUser = ?");
+            $editNom->execute(array($nom, $_SESSION["idUser"]));
+            $_SESSION["nom"] = $nom;
+        }
+
+        if($prenom != $_SESSION["prenom"]) {
+            $editPrenom = $sql->prepare("UPDATE user SET prenom = ? WHERE idUser = ?");
+            $editPrenom->execute(array($prenom, $_SESSION["idUser"]));
+            $_SESSION["prenom"] = $prenom;
+        }
+
+        if($email != $_SESSION["email"]) {
+            $editEmail = $sql->prepare("UPDATE user SET email = ? WHERE idUser = ?");
+            $editEmail->execute(array($email, $_SESSION["idUser"]));
+        }
+    }
+}
+
+// Dans cette fonction on change le mot de passe de l'utilisateur
+function editPassword($actualPassword, $newPassword, $confirmNewPassword, $sql) {
+    $actualPassword = hash("sha512", $actualPassword);
+    $newPassword = hash("sha512", $newPassword);
+    $confirmNewPassword = hash("sha512", $confirmNewPassword);
+
+    if(!empty($actualPassword) AND !empty($newPassword) AND !empty($confirmNewPassword)) {
+        $reqPassword = $sql->prepare("SELECT mdp FROM user WHERE idUser = ?");
+        $reqPassword->execute(array($_SESSION["idUser"]));
+        $userPassword = $reqPassword->fetch();
+
+        if($actualPassword == $userPassword) {
+            if($newPassword == $confirmNewPassword) {
+                $editPassword = $sql->prepare("UPDATE user SET mdp = ? WHERE idUser = ?");
+                $editPassword->execute(array($newPassword, $_SESSION["idUser"]));
+            }
+        }
+    }
+}
+
+// Dans cette fonctin on génére les catégories de la barre de navigation
 function headerCategory($sql) {
     $reqCategory = $sql->query("SELECT * FROM productCategory");
     

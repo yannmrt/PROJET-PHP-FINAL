@@ -4,6 +4,14 @@
 require_once("php/database.php");
 require_once("php/function.php");
 
+if(isset($_POST["validerSetting"])) {
+    editUser($_POST["nom"], $_POST["prenom"], $_POST["email"], $sql);
+}
+
+if(isset($_POST["validerPassword"])) {
+    editPassword($_POST["actualPassword"], $_POST["newPassword"], $_POST["confirmNewPassword"], $sql);
+}
+
 ?>
 <!doctype html>
 <html lang="fr">
@@ -42,18 +50,18 @@ require_once("php/function.php");
                                 <form method="POST" action="">
                                     <div class="form-group">
                                         <label for="name">Nom</label>
-                                        <input type="text" class="form-control" name="nom" required>
+                                        <input type="text" class="form-control" name="nom" value="<?php echo $_SESSION["nom"]; ?>" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Prénom</label>
-                                        <input type="text" class="form-control" name="prenom" required>
+                                        <input type="text" class="form-control" name="prenom" value="<?php echo $_SESSION["prenom"]; ?>"  required>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Adresse email</label>
-                                        <input type="email" class="form-control" name="email" required>
+                                        <input type="email" class="form-control" name="email" value="<?php echo $_SESSION["email"]; ?>"  required>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" name="valider" class="btn btn-outline-dark">Modifier mes informations</button>
+                                        <button type="submit" name="validerSetting" class="btn btn-outline-dark">Modifier mes informations</button>
                                     </div>
                                 </form>
                             </div>
@@ -78,19 +86,19 @@ require_once("php/function.php");
                             <div class="col-12">
                                 <form method="POST" action="">
                                     <div class="form-group">
-                                        <label for="name">Mot de passe actuel</label>
-                                        <input type="text" class="form-control" name="nom" required>
+                                        <label for="password">Mot de passe actuel</label>
+                                        <input type="password" class="form-control" name="actualPassword" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Nouveau mot de passe</label>
-                                        <input type="text" class="form-control" name="prenom" required>
+                                        <label for="password">Nouveau mot de passe</label>
+                                        <input type="password" class="form-control" name="newPassword" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="email">Confirmation du mot de passe</label>
-                                        <input type="email" class="form-control" name="email" required>
+                                        <label for="password">Confirmation du mot de passe</label>
+                                        <input type="password" class="form-control" name="confirmNewPassword" required>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" name="valider" class="btn btn-outline-dark">Modifier mon mot de passe</button>
+                                        <button type="password" name="validerPassword" class="btn btn-outline-dark">Modifier mon mot de passe</button>
                                     </div>
                                 </form>
                             </div>
