@@ -67,7 +67,7 @@ if(isset($_GET["id"])) {
                             <!-- Product Info -->
                             <div class="col-lg-5 col-md-9">
                                 <div class="col-12 product-name large">
-                                    <?php $product["nom"]; ?> ?>
+                                    <?php $product["nom"]; ?>
                                     <small>Par <a href="#"><?php echo $product["vendeur"]; ?></a></small>
                                 </div>
                                 <div class="col-12 px-0">
