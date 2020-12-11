@@ -25,7 +25,7 @@ function logoutUser() {
 }
 
 // Permet de créer un user avec le Nom, Prénom, Mot de passe, si la case accepter les cgu est cochée et la confirmation du mot de passe et la variable de connexion à la base de donnée
-function createUser($nom, $prenom, $email, $mdp, $confirmMdp, $acceptCgu, $sql) {
+function createUser($nom, $prenom, $email, $mdp, $confirmMdp, $sql) {
     $nom = htmlspecialchars($nom);
     $prenom = htmlspecialchars($prenom);
     $email = htmlspecialchars($email);
