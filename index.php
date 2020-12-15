@@ -1,8 +1,5 @@
 <?php
 
-// On démarre la session
-session_start();
-
 // On inclus les elements requis par la page
 require_once("php/database.php");
 require_once("php/function.php");

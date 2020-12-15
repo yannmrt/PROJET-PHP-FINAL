@@ -21,6 +21,7 @@ function getError($error) {
 function logoutUser() {
     $_SESSION = array();
     session_destroy();
+    header('Location: index.php');
 
 }
 
@@ -132,6 +133,8 @@ function headerCategory($sql) {
     }
 }
 
+
+// Dans cette fonction on récupère les informations d'un produit
 function infoProduct($idProduct, $sql) {
     $reqProduct = $sql->prepare("SELECT * FROM product WHERE idProduct = ?");
     $reqProduct->execute(array($idProduct));
@@ -144,11 +147,14 @@ function infoProduct($idProduct, $sql) {
 
 }
 
-function settingUser() {
+// Dans cette fonction on envoie l'avis d'un client par rapport à un produit
+function sendFeedbackProduct($descriptionAvis, $noteAvis, $idUser, $idProduct, $sql) {
+    $descriptionAvis = htmlspecialchars($descriptionAvis);
+    $noteAvis = htmlspecialchars($noteAvis);
+    $idProduct = htmlspecialchars($idProduct);
 
+    if(!empty($descriptionAvis) AND !empty($noteAvis) AND !empty($idProduct)) {
+        $insertAvis = $sql->prepare("INSERT INTO feedbackProduct SET description = ?, note = ?, idProduct = ?, idUser = ?");
+        $insertAvis->execute(array($descriptionAvis, $noteAvis, $idProduct, $idUser));
+    }
 }
-
-function addProduct() {
-
-}
-
