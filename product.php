@@ -197,61 +197,7 @@ if(isset($_POST['submitAvis'])) {
                                     <div class="row">
                                         <div class="col-12">
 
-                                            <!-- Comments -->
-                                            <div class="col-12 text-justify py-2 mb-3 bg-gray">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <strong class="mr-2">Steve Rogers</strong>
-                                                        <small>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                        </small>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ullamcorper quam, non congue odio.
-                                                        <br>
-                                                        Fusce ligula augue, faucibus sed neque non, auctor rhoncus enim. Sed nec molestie turpis. Nullam accumsan porttitor rutrum. Curabitur eleifend venenatis volutpat.
-                                                        <br>
-                                                        Aenean faucibus posuere vehicula.
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <small>
-                                                            <i class="fas fa-clock mr-2"></i>5 hours ago
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Comments -->
-
-                                            <!-- Comments -->
-                                            <div class="col-12 text-justify py-2 mb-3 bg-gray">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <strong class="mr-2">Bucky Barns</strong>
-                                                        <small>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                        </small>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ut ullamcorper quam, non congue odio.
-                                                        <br>
-                                                        Aenean faucibus posuere vehicula.
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <small>
-                                                            <i class="fas fa-clock mr-2"></i>5 hours ago
-                                                        </small>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- Comments -->
+                                        <?php echo getFeedback($_GET['id'], $sql); ?>
 
                                         </div>
                                     </div>

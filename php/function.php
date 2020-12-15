@@ -158,3 +158,55 @@ function sendFeedbackProduct($descriptionAvis, $noteAvis, $idUser, $idProduct, $
         $insertAvis->execute(array($descriptionAvis, $noteAvis, $idProduct, $idUser));
     }
 }
+
+function getFeedback($idProduct, $sql) {
+    $idProduct = htmlspecialchars($idProduct);
+    
+    if(!empty($idProduct)) {
+        $reqFeedback = $sql->prepare("SELECT * FROM feedbackProduct WHERE idProduct = ?");
+        $reqFeedback->execute(array($idProduct));
+        $feedbackExist = $reqFeedback->rowCount();
+
+        if($feedbackExist > 0) {
+            while($feedback = $reqFeedback->fetch()) {
+
+                // On va récupèrer les infos de l'utilisateur ayant laisser l'avis
+                $reqUserF = $sql->prepare("SELECT * FROM user WHERE idUser = ?");
+                $reqUserF->execute(array($feedback["idUser"]));
+                $user = $reqUserF->fetch();
+
+                echo '<!-- Comments -->
+                <div class="col-12 text-justify py-2 mb-3 bg-gray">
+                    <div class="row">
+                        <div class="col-12">
+                            <strong class="mr-2">' . $user['prenom'] . ' ' . $user['nom'] .'</strong>
+                            <!--<small>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </small>-->
+                            <small>' . $feedback["note"] . '/5</small>
+                        </div>
+                        <div class="col-12">
+                            ' . $feedback["description"] .'
+                        </div>
+                    </div>
+                </div>
+                <!-- Comments -->';
+
+            }
+        } else {
+            echo "Aucun avis pour ce produit.";
+        }
+    }
+}
+
+function getSimilarProduct($idProductCategory,$sql) {
+    $idProductCategory = htmlspecialchars($idProductCategory);
+
+    if(!empty($idProductCategory)) {
+        $reqSimilarProduct = $sql->prepare("SELECT * FROM product WHERE idProductCategory = ?");
+    }
+}
