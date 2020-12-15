@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Ven 11 Décembre 2020 à 09:26
+-- Généré le :  Mar 15 Décembre 2020 à 17:05
 -- Version du serveur :  10.1.47-MariaDB-0+deb9u1
 -- Version de PHP :  7.0.33-0+deb9u10
 
@@ -33,6 +33,52 @@ CREATE TABLE `deliveryAdress` (
   `telephone` int(11) NOT NULL,
   `idUser` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `feedbackProduct`
+--
+
+CREATE TABLE `feedbackProduct` (
+  `idFeedbackProduct` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `note` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `idProduct` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Contenu de la table `feedbackProduct`
+--
+
+INSERT INTO `feedbackProduct` (`idFeedbackProduct`, `idUser`, `note`, `description`, `idProduct`) VALUES
+(1, 1, 1, 'zfeef', 1),
+(2, 1, 4, 'ytyututy', 1),
+(3, 1, 1, 'hk,h,', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `product`
+--
+
+CREATE TABLE `product` (
+  `idProduct` int(11) NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `vendeur` varchar(255) NOT NULL,
+  `prix` int(11) NOT NULL,
+  `idProductCategory` int(11) NOT NULL,
+  `description` text NOT NULL,
+  `descriptionFull` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Contenu de la table `product`
+--
+
+INSERT INTO `product` (`idProduct`, `nom`, `vendeur`, `prix`, `idProductCategory`, `description`, `descriptionFull`) VALUES
+(1, 'Appareil photo', 'Canon', 1000, 1, '<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>', '<h4>OPERATING SYSTEM</h4>\r\n\r\n                                            <p><strong>Available with Windows 10 Home:</strong> Gaming is better than ever on Windows 10, with games in 4K, DirectX 12, and streaming your gameplay*.</p>');
 
 -- --------------------------------------------------------
 
@@ -88,6 +134,18 @@ ALTER TABLE `deliveryAdress`
   ADD PRIMARY KEY (`idDeliveryAdress`);
 
 --
+-- Index pour la table `feedbackProduct`
+--
+ALTER TABLE `feedbackProduct`
+  ADD PRIMARY KEY (`idFeedbackProduct`);
+
+--
+-- Index pour la table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`idProduct`);
+
+--
 -- Index pour la table `productCategory`
 --
 ALTER TABLE `productCategory`
@@ -108,6 +166,16 @@ ALTER TABLE `user`
 --
 ALTER TABLE `deliveryAdress`
   MODIFY `idDeliveryAdress` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `feedbackProduct`
+--
+ALTER TABLE `feedbackProduct`
+  MODIFY `idFeedbackProduct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT pour la table `product`
+--
+ALTER TABLE `product`
+  MODIFY `idProduct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `productCategory`
 --
