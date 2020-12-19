@@ -9,8 +9,19 @@ if(isset($_GET["id"])) {
     $product = infoProduct($_GET["id"], $sql);
 }
 
+// Dans ce code on lance la création de l'avis par la fonction sendFeedBackProduct
 if(isset($_POST['submitAvis'])) {
     sendFeedbackProduct($_POST["descriptionAvis"], $_POST["noteAvis"], $_SESSION["idUser"], $_GET["id"], $sql);
+}
+
+// Ajout du produit dans le panier
+if(isset($_POST["submitCart"])) {
+    if(isset($_SESSION['panier'])) {
+        ajouterArticle($product["idProduct"],$product["nom"],$_POST["qte"],$product["prix"]);
+    } else {
+        creationPanier();
+        ajouterArticle($product["idProduct"],$product["nom"],$_POST["qte"],$product["prix"]);
+    }
 }
 
 ?>
@@ -79,14 +90,16 @@ if(isset($_POST['submitAvis'])) {
                                         </span>
                                         </div>
                                         <div class="col-xl-5 col-md-9 col-sm-3 col-5 mx-auto mt-3">
+                                        <form method="POST">
                                             <div class="form-group">
                                                 <label for="qty">Quantité</label>
-                                                <input type="number" id="qty" min="1" value="1" class="form-control" required>
+                                                <input type="number" id="qty" min="1" name="qte" value="1" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-12 mt-3">
-                                            <button class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>Ajouter au panier</button>
+                                            <button class="btn btn-outline-dark" name="submitCart" type="submit"><i class="fas fa-cart-plus mr-2"></i>Ajouter au panier</button>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

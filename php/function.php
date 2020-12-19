@@ -303,8 +303,19 @@ function creationPanier() {
     }
  }
 
+// Cette fonction permet de compter le nombre d'articles dans le panier
+function compterArticles() {
+
+   if(isset($_SESSION['panier'])) {
+       return count($_SESSION['panier']['idProduit']);
+   } else {
+       return 0;
+   }
+
+}
+
  // Dans cette fonction on supprime un produit du panier 
- function supprimerArticle($libelleProduit) {
+ function supprimerArticle($idProduit) {
     //Si le panier existe
     if (creationPanier() && !isVerrouille())
     {
@@ -316,9 +327,9 @@ function creationPanier() {
        $tmp['prixProduit'] = array();
        $tmp['verrou'] = $_SESSION['panier']['verrou'];
  
-       for($i = 0; $i < count($_SESSION['panier']['libelleProduit']); $i++)
+       for($i = 0; $i < count($_SESSION['panier']['idProduit']); $i++)
        {
-          if ($_SESSION['panier']['libelleProduit'][$i] !== $libelleProduit)
+          if ($_SESSION['panier']['idProduit'][$i] !== $idProduit)
           {
              array_push( $tmp['idProduit'],$_SESSION['panier']['idProduit'][$i]);
              array_push( $tmp['libelleProduit'],$_SESSION['panier']['libelleProduit'][$i]);
@@ -334,26 +345,6 @@ function creationPanier() {
     }
  }
 
- // Dans cette fonction on modifie un article dans le panier 
- function modifierQTeArticle($libelleProduit,$qteProduit) {
-    //Si le panier existe
-    if (creationPanier() && !isVerrouille())
-    {
-       //Si la quantité est positive on modifie sinon on supprime l'article
-       if ($qteProduit > 0)
-       {
-          //Recherche du produit dans le panier
-          $positionProduit = array_search($libelleProduit,  $_SESSION['panier']['libelleProduit']);
- 
-          if ($positionProduit !== false)
-          {
-             $_SESSION['panier']['qteProduit'][$positionProduit] = $qteProduit ;
-          }
-       }
-       else
-       supprimerArticle($libelleProduit);
-    }
- }
 
  // Dans cette fonction on vérifie l'état du verrou du panier
  function isVerrouille() {
@@ -363,15 +354,17 @@ function creationPanier() {
     return false;
  }
 
- // Dans cette fonction on compte le nombre d'articles présent dans la panier
- function compterArticles() {
-   if (isset($_SESSION['panier']))
-   return count($_SESSION['panier']['libelleProduit']);
-   else
-   return 0;
-}
-
 // Dans cette fonction on supprime le panier du client
 function supprimePanier() {
     unset($_SESSION['panier']);
 }
+
+// Cette fonction nous permet de faire le montant total du panier
+function MontantGlobal(){
+    $total=0;
+    for($i = 0; $i < count($_SESSION['panier']['libelleProduit']); $i++)
+    {
+       $total += $_SESSION['panier']['qteProduit'][$i] * $_SESSION['panier']['prixProduit'][$i];
+    }
+    return $total;
+ }

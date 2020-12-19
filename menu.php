@@ -68,8 +68,8 @@
                                 </form>
                             </div>
                             <div class="col-lg-auto text-center text-lg-left header-item-holder">
-                                <a href="#" class="header-item">
-                                    <i class="fas fa-shopping-bag mr-2"></i><span id="header-favorite">0</span>
+                                <a href="cart.php" class="header-item">
+                                    <i class="fas fa-shopping-bag mr-2"></i><span id="header-favorite"><?php echo compterArticles(); ?></span>
                                 </a>
                                 <!--<a href="#" class="header-item">
                                     <i class="fas fa-user"></i><span id="header-qty" class="mr-3"> Mon compte</span>

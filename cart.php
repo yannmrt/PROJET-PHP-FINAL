@@ -4,6 +4,18 @@
 require_once("php/database.php");
 require_once("php/function.php");
 
+// Suppression d'un produit du panier client 
+if(isset($_GET["delete"])) {
+    if(isset($_SESSION["panier"])) {
+        //supprimerArticle();
+        $idProduit = $_GET["delete"];
+        supprimerArticle($idProduit);
+    }
+}
+
+// Modifier la quantité
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -46,6 +58,7 @@ require_once("php/function.php");
                                         <table class="table table-striped table-hover table-sm">
                                             <thead>
                                             <tr>
+                                                <th>Illusration</th>
                                                 <th>Produit</th>
                                                 <th>Prix</th>
                                                 <th>Quantité</th>
@@ -54,7 +67,7 @@ require_once("php/function.php");
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <?php if (creationPanier()) {
+                                            <?php if(creationPanier()) {
                                                      $nbArticles=count($_SESSION['panier']['libelleProduit']); 
                                                      if($nbArticles <= 0) {
                                                          echo "<tr><td>Le panier est vide</td></tr>";
@@ -63,44 +76,30 @@ require_once("php/function.php");
                                                         for ($i=0 ;$i < $nbArticles ; $i++) {
 
                                                             echo "<tr>";
-                                                            echo '<td><img src="images/produit/'.htmlspecialchars($_SESSION['panier']['idProduit'][$i]).'.jpg" class="img-fluid">'.htmlspecialchars($_SESSION['panier']['libelleProduit'][$i]).'</td>';
+                                                            echo '<td><img src="images/produit/'.htmlspecialchars($_SESSION['panier']['idProduit'][$i]).'.jpg" class="img-fluid"></td>';
+                                                            echo '<td>'.htmlspecialchars($_SESSION['panier']['libelleProduit'][$i]).'</td>';
                                                             echo '<td>'.htmlspecialchars($_SESSION['panier']['prixProduit'][$i]).'</td>';
-                                                            echo '<td><input type="number" name=\"q[]\"  min="1" value="'.htmlspecialchars($_SESSION['panier']['qteProduit'][$i]).'"></td>';
-                                                            echo '<td><a href=""><button class="btn btn-link text-danger"><i class="fas fa-times"></i></button></a></td>'                                                           
+                                                            echo '<td>'.htmlspecialchars($_SESSION['panier']['qteProduit'][$i]).'</td>';
+                                                            echo '<td><a href="cart.php?delete='.$_SESSION['panier']['idProduit'][$i].'"><button class="btn btn-link text-danger" type="button"><i class="fas fa-times"></i></button></a></td>';   
+                                           
                                                         }
+                                                        echo '</tbody>
+                                                            <tfoot>
+                                                            <tr>
+                                                                <th colspan="3" class="text-right">Total</th>
+                                                                <th>'.MontantGlobal().' €</th>
+                                                                <th></th>
+                                                            </tr>
+                                                            </tfoot>
+                                                            
+                                                            ';          
                                                      }
+                                                    }
                                             ?>
-                                            <tr>
-                                                <td>
-                                                    <img src="images/image-2.jpg" class="img-fluid">
-                                                    Optoma 4K HDR Projector
-                                                </td>
-                                                <td>
-                                                    $1,500
-                                                </td>
-                                                <td>
-                                                    <input type="number" min="1" value="1">
-                                                </td>
-                                                <td>
-                                                    $1,500
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-link text-danger"><i class="fas fa-times"></i></button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <th colspan="3" class="text-right">Total</th>
-                                                <th>$4,000</th>
-                                                <th></th>
-                                            </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                     <div class="col-12 text-right">
-                                        <button class="btn btn-outline-secondary mr-3" type="submit">Update</button>
-                                        <a href="#" class="btn btn-outline-success">Checkout</a>
+                                        <a href="#" class="btn btn-outline-success">Commander</a>
                                     </div>
                                 </form>
                             </div>
