@@ -78,7 +78,7 @@ if(isset($_GET["delete"])) {
                                                             echo "<tr>";
                                                             echo '<td><img src="images/produit/'.htmlspecialchars($_SESSION['panier']['idProduit'][$i]).'.jpg" class="img-fluid"></td>';
                                                             echo '<td>'.htmlspecialchars($_SESSION['panier']['libelleProduit'][$i]).'</td>';
-                                                            echo '<td>'.htmlspecialchars($_SESSION['panier']['prixProduit'][$i]).'</td>';
+                                                            echo '<td>'.htmlspecialchars($_SESSION['panier']['prixProduit'][$i]).' €</td>';
                                                             echo '<td>'.htmlspecialchars($_SESSION['panier']['qteProduit'][$i]).'</td>';
                                                             echo '<td><a href="cart.php?delete='.$_SESSION['panier']['idProduit'][$i].'"><button class="btn btn-link text-danger" type="button"><i class="fas fa-times"></i></button></a></td>';   
                                            
