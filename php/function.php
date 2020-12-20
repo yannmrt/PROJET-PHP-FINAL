@@ -204,6 +204,18 @@ function getFeedback($idProduct, $sql) {
     }
 }
 
+// On supprime un avis grâce à son id et la bdd
+function removeFeedback($idFeedback, $sql) {
+
+    $idFeedback = htmlspecialchars($idFeedback);
+
+    if(!empty($idFeedback)) {
+        $req = $sql->prepare("DELETE FROM feedbackProduct WHERE idFeedback = ?");
+        $req->execute(array($idFeedback));
+    }
+
+}
+
 // Dans cette fonction on récupère les infos d'une catégorie, par l'id de la catégorie et la bdd
 function getCategoryInfo($idProductCategory, $sql) {
     $idProductCategory = htmlspecialchars($idProductCategory);
