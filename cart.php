@@ -13,8 +13,6 @@ if(isset($_GET["delete"])) {
     }
 }
 
-// Modifier la quantité
-
 
 ?>
 <!doctype html>

@@ -4,6 +4,7 @@
 require_once("php/database.php");
 require_once("php/function.php");
 
+// On vérifie si le formulaire à été envoyé et on envoie la requête vers la fonction
 if(isset($_POST['valider'])) {
     createUser($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['mdp'], $_POST['confirmMdp'], $sql);
 

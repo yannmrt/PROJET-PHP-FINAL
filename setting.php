@@ -4,10 +4,12 @@
 require_once("php/database.php");
 require_once("php/function.php");
 
+// On vérifie si le formulaire des informations à été envoyé et on envoie la fonction
 if(isset($_POST["validerSetting"])) {
     editUser($_POST["nom"], $_POST["prenom"], $_POST["email"], $sql);
 }
 
+// On vérifie si le formulaire de changement de mot de passe à éét envoyé et envoie la fonction
 if(isset($_POST["validerPassword"])) {
     editPassword($_POST["actualPassword"], $_POST["newPassword"], $_POST["confirmNewPassword"], $sql);
 }

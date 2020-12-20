@@ -4,6 +4,7 @@
 require_once("php/database.php");
 require_once("php/function.php");
 
+// On récupère l'id dans l'url pour afficher la page
 if(isset($_GET["id"])) {
     $id = $_GET["id"];
     $category = getCategoryInfo($id, $sql);
