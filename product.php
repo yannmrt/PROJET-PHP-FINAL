@@ -24,6 +24,11 @@ if(isset($_POST["submitCart"])) {
     }
 }
 
+// Supprimer un avis
+if(isset($_GET["delFeedback"])) {
+    removeFeedback($_GET["delFeedback"], $sql);
+}
+
 ?>
 <!doctype html>
 <html lang="fr">

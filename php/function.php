@@ -193,6 +193,7 @@ function getFeedback($idProduct, $sql) {
                         <div class="col-12">
                             ' . $feedback["description"] .'
                         </div>
+                        <a href="?product='.$idProduct.'&delFeedback='.$feedback["idFeedbackProduct"].'">Supprimer</a>
                     </div>
                 </div>
                 <!-- Comments -->';
@@ -210,7 +211,7 @@ function removeFeedback($idFeedback, $sql) {
     $idFeedback = htmlspecialchars($idFeedback);
 
     if(!empty($idFeedback)) {
-        $req = $sql->prepare("DELETE FROM feedbackProduct WHERE idFeedback = ?");
+        $req = $sql->prepare("DELETE FROM feedbackProduct WHERE idFeedbackProduct = ?");
         $req->execute(array($idFeedback));
     }
 
