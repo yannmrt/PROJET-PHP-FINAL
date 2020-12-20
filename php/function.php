@@ -314,10 +314,10 @@ function compterArticles() {
 
 }
 
- // Dans cette fonction on supprime un produit du panier 
+ // Dans cette fonction on supprime un produit du panier grâce son id
  function supprimerArticle($idProduit) {
     //Si le panier existe
-    if (creationPanier() && !isVerrouille())
+    if(creationPanier() && !isVerrouille())
     {
        //Nous allons passer par un panier temporaire
        $tmp=array();
@@ -348,10 +348,11 @@ function compterArticles() {
 
  // Dans cette fonction on vérifie l'état du verrou du panier
  function isVerrouille() {
-    if (isset($_SESSION['panier']) && $_SESSION['panier']['verrou'])
-    return true;
-    else
-    return false;
+    if(isset($_SESSION['panier']) && $_SESSION['panier']['verrou']) {
+        return true;
+    } else {
+        return false;
+    }
  }
 
 // Dans cette fonction on supprime le panier du client
