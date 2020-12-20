@@ -210,11 +210,19 @@ function removeFeedback($idFeedback, $sql) {
 
     $idFeedback = htmlspecialchars($idFeedback);
 
-    if(!empty($idFeedback)) {
-        $req = $sql->prepare("DELETE FROM feedbackProduct WHERE idFeedbackProduct = ?");
-        $req->execute(array($idFeedback));
+    if($_SESSION) {
+        if(!empty($idFeedback)) {
+            // On va vérifier que c'est bel et bien l'utilisateur qui a écrit le commentaire
+            $reqUser = $sql->prepare("SELECT * FROM feedbackProduct WHERE idFeedbackProduct = ?");
+            $reqUser->execute(array($idFeedback));
+            $userFeedback = $reqUser->fetch();
+    
+            if($userFeedback["idUser"] == $_SESSION["idUser"]) {
+                $req = $sql->prepare("DELETE FROM feedbackProduct WHERE idFeedbackProduct = ?");
+                $req->execute(array($idFeedback));
+            }
+        }    
     }
-
 }
 
 // Dans cette fonction on récupère les infos d'une catégorie, par l'id de la catégorie et la bdd
