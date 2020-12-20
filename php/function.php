@@ -193,7 +193,7 @@ function getFeedback($idProduct, $sql) {
                         <div class="col-12">
                             ' . $feedback["description"] .'
                         </div>
-                        <a href="?product='.$idProduct.'&delFeedback='.$feedback["idFeedbackProduct"].'">Supprimer</a>
+                        <a href="?id='.$idProduct.'&amp;delFeedback='.$feedback["idFeedbackProduct"].'">Supprimer</a>
                     </div>
                 </div>
                 <!-- Comments -->';
