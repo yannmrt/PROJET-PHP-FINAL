@@ -252,11 +252,12 @@ function printProductByCategory($idProductCategory, $sql) {
                             </div>
                             <div class="col-12 mb-3">
                                 <span class="product-price">
-                                    ' . $product["prix"] . '
+                                    ' . $product["prix"] . ' €
                                 </span>
                             </div>
                             <div class="col-12 mb-3 align-self-end">
-                                <button class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>Ajouter au panier</button>
+                            <a href="product.php?id=' . $product["idProduct"] . '">
+                                <button class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>Voir</button></a>
                             </div>
                         </div>
                     </div>
