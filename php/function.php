@@ -243,8 +243,8 @@ function printProductByCategory($idProductCategory, $sql) {
                     <div class="col-12 bg-white text-center h-100 product-item">
                         <div class="row h-100">
                             <div class="col-12 p-0 mb-3">
-                                <a href="product.html">
-                                    <img src="images/image-1.jpg" class="img-fluid">
+                                <a href="product.php?id=' . $product["idProduct"] . '">
+                                    <img src="images/produit/' . $product["idProduct"] . '.jpg" class="img-fluid">
                                 </a>
                             </div>
                             <div class="col-12 mb-3">
