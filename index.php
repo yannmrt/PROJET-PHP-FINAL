@@ -99,7 +99,7 @@ require_once("php/function.php");
                                 </div>
                                 <div class="row">
 
-                                <?php echo printProductByCategory("1", $sql); ?>
+                                <?php echo printProductByCategory("2", $sql); ?>
                                     
                                 </div>
                             </div>
