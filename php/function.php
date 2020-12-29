@@ -210,3 +210,19 @@ function getSimilarProduct($idProductCategory,$sql) {
         $reqSimilarProduct = $sql->prepare("SELECT * FROM product WHERE idProductCategory = ?");
     }
 }
+
+function getCategoryInfo($idProductCategory, $sql) {
+    $idProductCategory = htmlspecialchars($idProductCategory);
+
+    if(!empty($idProductCategory)) {
+        $reqCategory = $sql->prepare("SELECT * FROM productCategory WHERE idProductCategory = ?");
+        $reqCategory->execute(array($idProductCategory));
+        $categoryExist = $reqCategory->rowCount();
+
+        if($categoryExist > 0) {
+            while($category = $reqCategory->fetch()) {
+                return $category;
+            }
+        }
+    }
+}
