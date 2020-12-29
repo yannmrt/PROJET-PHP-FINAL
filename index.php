@@ -69,7 +69,7 @@ require_once("php/function.php");
                             <div class="col-12 py-3">
                                 <div class="row">
                                     <div class="col-12 text-center text-uppercase">
-                                        <h2><?php $category = getCategoryInfo();
+                                        <h2><?php $category = getCategoryInfo("1", $sql);
                                         echo $category["nom"];  ?></h2>
                                     </div>
                                 </div>
