@@ -47,23 +47,7 @@ if(isset($_POST['submitAvis'])) {
                             <!-- Product Images -->
                             <div class="col-lg-5 col-md-12 mb-3">
                                 <div class="col-12 mb-3">
-                                    <div class="img-large border" style="background-image: url('images/image-1.jpg')"></div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="row">
-                                        <div class="col-sm-2 col-3">
-                                            <div class="img-small border" style="background-image: url('images/image-1.jpg')" data-src="images/image-1.jpg"></div>
-                                        </div>
-                                        <div class="col-sm-2 col-3">
-                                            <div class="img-small border" style="background-image: url('images/image-2.jpg')" data-src="images/image-2.jpg"></div>
-                                        </div>
-                                        <div class="col-sm-2 col-3">
-                                            <div class="img-small border" style="background-image: url('images/image-3.jpg')" data-src="images/image-3.jpg"></div>
-                                        </div>
-                                        <div class="col-sm-2 col-3">""
-                                            <div class="img-small border" style="background-image: url('images/image-4.jpg')" data-src="images/image-4.jpg"></div>
-                                        </div>
-                                    </div>
+                                    <div class="img-large border" style="background-image: url('images/produit/<?php echo $product["idProduct"]; ?>.jpg')"></div>
                                 </div>
                             </div>
                             <!-- Product Images -->
