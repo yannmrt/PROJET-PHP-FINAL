@@ -248,7 +248,7 @@ function printProductByCategory($idProductCategory, $sql) {
                                 </a>
                             </div>
                             <div class="col-12 mb-3">
-                                <a href="product.html" class="product-name">' . $product["nom"] . '</a>
+                                <a href="product.php?id=' . $product["idProduct"] . '" class="product-name">' . $product["nom"] . '</a>
                             </div>
                             <div class="col-12 mb-3">
                                 <span class="product-price">
