@@ -159,6 +159,7 @@ function sendFeedbackProduct($descriptionAvis, $noteAvis, $idUser, $idProduct, $
     }
 }
 
+// Dans cette fonction on récupère l'avis d'un client par rapport à un produit
 function getFeedback($idProduct, $sql) {
     $idProduct = htmlspecialchars($idProduct);
     
@@ -203,14 +204,7 @@ function getFeedback($idProduct, $sql) {
     }
 }
 
-function getSimilarProduct($idProductCategory,$sql) {
-    $idProductCategory = htmlspecialchars($idProductCategory);
-
-    if(!empty($idProductCategory)) {
-        $reqSimilarProduct = $sql->prepare("SELECT * FROM product WHERE idProductCategory = ?");
-    }
-}
-
+// Dans cette fonction on récupère les infos d'une catégorie
 function getCategoryInfo($idProductCategory, $sql) {
     $idProductCategory = htmlspecialchars($idProductCategory);
 
@@ -226,6 +220,7 @@ function getCategoryInfo($idProductCategory, $sql) {
     }
 }
 
+// Dans cette fonctionon créer un bloc de produit en fonction de l'id de la catégorie
 function printProductByCategory($idProductCategory, $sql) {
     $idProductCategory = htmlspecialchars($idProductCategory);
 
@@ -268,3 +263,19 @@ function printProductByCategory($idProductCategory, $sql) {
         }
     }
 }
+
+//FONCTIONS DU PANIER
+
+// Dans cette fonction on créer le panier du client
+function creationPanier(){
+    if (!isset($_SESSION['panier'])){
+       $_SESSION['panier']=array();
+       $_SESSION['panier']['libelleProduit'] = array();
+       $_SESSION['panier']['qteProduit'] = array();
+       $_SESSION['panier']['prixProduit'] = array();
+       $_SESSION['panier']['verrou'] = false;
+    }
+    return true;
+ }
+
+ // dans cette fonction 
