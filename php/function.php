@@ -235,7 +235,7 @@ function printProductByCategory($idProductCategory, $sql) {
         $productExist = $reqProduct->rowCount();
 
         if($productExist > 0) {
-            for($i=0;$i<=4;$i++) { 
+            for($i=0;$i<=3;$i++) { 
                 $product = $reqProduct->fetch();
                 
                 echo ' <!-- Product -->
