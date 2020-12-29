@@ -12,9 +12,9 @@ $_INFO = array(
 $_DB = array(
 
     "host" => "localhost",
-    "name" => "phpfinal",
-    "user" => "pi",
-    "pass" => "raspberry"
+    "name" => "kbwyoyxi_projetphp",
+    "user" => "kbwyoyxi_projetphp",
+    "pass" => "09#6Mgum"
 );
 
 // Fonction déconnexion
