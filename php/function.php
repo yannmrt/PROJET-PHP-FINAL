@@ -220,8 +220,49 @@ function getCategoryInfo($idProductCategory, $sql) {
         $categoryExist = $reqCategory->rowCount();
 
         if($categoryExist > 0) {
-            while($category = $reqCategory->fetch()) {
-                return $category;
+            $category = $reqCategory->fetch()
+            return $category;
+        }
+    }
+}
+
+function printProductByCategory($idProductCategory, $sql) {
+    $idProductCategory = htmlspecialchars($idProductCategory);
+
+    if(!empty($idProductCategory)) {
+        $reqProduct = $sql->prepare("SELECT * FROM product WHERE idCategory = ?");
+        $reqProduct->execute(array($idProductCategory));
+        $productExist = $reqProduct->rowCount();
+
+        if($productExist > 0) {
+            for($i=0;$i<=4;$i++) { 
+                $product = $reqProduct->fetch();
+                
+                echo ' <!-- Product -->
+                <div class="col-lg-3 col-sm-6 my-3">
+                    <div class="col-12 bg-white text-center h-100 product-item">
+                        <div class="row h-100">
+                            <div class="col-12 p-0 mb-3">
+                                <a href="product.html">
+                                    <img src="images/image-1.jpg" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <a href="product.html" class="product-name">' . $product["nom"] . '</a>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <span class="product-price">
+                                    ' . $product["prix"] . '
+                                </span>
+                            </div>
+                            <div class="col-12 mb-3 align-self-end">
+                                <button class="btn btn-outline-dark" type="button"><i class="fas fa-cart-plus mr-2"></i>Ajouter au panier</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Product -->';
+
             }
         }
     }
