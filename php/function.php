@@ -220,7 +220,7 @@ function getCategoryInfo($idProductCategory, $sql) {
         $categoryExist = $reqCategory->rowCount();
 
         if($categoryExist > 0) {
-            $category = $reqCategory->fetch()
+            $category = $reqCategory->fetch();
             return $category;
         }
     }
