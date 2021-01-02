@@ -129,7 +129,7 @@ function headerCategory($sql) {
     $reqCategory = $sql->query("SELECT * FROM productCategory");
     
     while($category = $reqCategory->fetch()) {
-        echo '<li class="nav-item"><a class="nav-link" href="#" aria-haspopup="true" aria-expanded="false">' . $category["nom"] . '</a></li>';
+        echo '<li class="nav-item"><a class="nav-link" href="category.php?id=' . $category["idProduct"] . '" aria-haspopup="true" aria-expanded="false">' . $category["nom"] . '</a></li>';
     }
 }
 
