@@ -77,7 +77,7 @@ function loginUser($email, $mdp, $sql) {
 
 }
 
-// Cette fonction permet de modifier les informations du compte de l'utilisateur
+// Cette fonction permet de modifier les informations du compte de l'utilisateur, on entre les informations dans des variables ainsi que la bdd dans la variable sql
 function editUser($nom, $prenom, $email, $sql) {
     $nom = htmlspecialchars($nom);
     $prenom = htmlspecialchars($prenom);
@@ -104,7 +104,7 @@ function editUser($nom, $prenom, $email, $sql) {
     }
 }
 
-// Dans cette fonction on change le mot de passe de l'utilisateur
+// Dans cette fonction on change le mot de passe de l'utilisateur, on entre les différentes versions du mot de passe ainsi que la bdd
 function editPassword($actualPassword, $newPassword, $confirmNewPassword, $sql) {
     $actualPassword = hash("sha512", $actualPassword);
     $newPassword = hash("sha512", $newPassword);
@@ -124,7 +124,7 @@ function editPassword($actualPassword, $newPassword, $confirmNewPassword, $sql) 
     }
 }
 
-// Dans cette fonctin on génére les catégories de la barre de navigation
+// Dans cette fonctin on génére les catégories de la barre de navigation, on entre uniquement la bdd pour effectuer la requête
 function headerCategory($sql) {
     $reqCategory = $sql->query("SELECT * FROM productCategory");
     
@@ -134,7 +134,7 @@ function headerCategory($sql) {
 }
 
 
-// Dans cette fonction on récupère les informations d'un produit
+// Dans cette fonction on récupère les informations d'un produit, on entre l'id du produit ainsi que la bdd
 function infoProduct($idProduct, $sql) {
     $reqProduct = $sql->prepare("SELECT * FROM product WHERE idProduct = ?");
     $reqProduct->execute(array($idProduct));
@@ -147,7 +147,7 @@ function infoProduct($idProduct, $sql) {
 
 }
 
-// Dans cette fonction on envoie l'avis d'un client par rapport à un produit
+// Dans cette fonction on envoie l'avis d'un client par rapport à un produit, on entre la message, la note l'id de l'utilisateur, l'id du produit et la bdd
 function sendFeedbackProduct($descriptionAvis, $noteAvis, $idUser, $idProduct, $sql) {
     $descriptionAvis = htmlspecialchars($descriptionAvis);
     $noteAvis = htmlspecialchars($noteAvis);
@@ -159,7 +159,7 @@ function sendFeedbackProduct($descriptionAvis, $noteAvis, $idUser, $idProduct, $
     }
 }
 
-// Dans cette fonction on récupère l'avis d'un client par rapport à un produit
+// Dans cette fonction on récupère l'avis d'un client par rapport à un produit, on récupère l'id du produit et la bdd 
 function getFeedback($idProduct, $sql) {
     $idProduct = htmlspecialchars($idProduct);
     
@@ -204,7 +204,7 @@ function getFeedback($idProduct, $sql) {
     }
 }
 
-// Dans cette fonction on récupère les infos d'une catégorie
+// Dans cette fonction on récupère les infos d'une catégorie, par l'id de la catégorie et la bdd
 function getCategoryInfo($idProductCategory, $sql) {
     $idProductCategory = htmlspecialchars($idProductCategory);
 
@@ -220,7 +220,7 @@ function getCategoryInfo($idProductCategory, $sql) {
     }
 }
 
-// Dans cette fonctionon créer un bloc de produit en fonction de l'id de la catégorie
+// Dans cette fonctionon créer un bloc de produit en fonction de l'id de la catégorie et on inclus la bdd
 function printProductByCategory($idProductCategory, $sql) {
     $idProductCategory = htmlspecialchars($idProductCategory);
 
@@ -267,7 +267,7 @@ function printProductByCategory($idProductCategory, $sql) {
 //FONCTIONS DU PANIER
 
 // Dans cette fonction on créer le panier du client
-function creationPanier(){
+function creationPanier() {
     if (!isset($_SESSION['panier'])){
        $_SESSION['panier']=array();
        $_SESSION['panier']['libelleProduit'] = array();

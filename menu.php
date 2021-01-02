@@ -52,7 +52,7 @@
                         <div class="row">
                             <div class="col-lg-auto">
                                 <div class="site-logo text-center text-lg-left">
-                                    <a href="index.html"><?php echo $_INFO["nom"]; ?></a>
+                                    <a href="index.php"><?php echo $_INFO["nom"]; ?></a>
                                 </div>
                             </div>
                             <div class="col-lg-5 mx-auto mt-4 mt-lg-0">
