@@ -268,8 +268,9 @@ function printProductByCategory($idProductCategory, $sql) {
 
 // Dans cette fonction on créer le panier du client
 function creationPanier() {
-    if (!isset($_SESSION['panier'])){
+    if (!isset($_SESSION['panier'])) {
        $_SESSION['panier']=array();
+       $_SESSION['panier']['idProduit'] = array();
        $_SESSION['panier']['libelleProduit'] = array();
        $_SESSION['panier']['qteProduit'] = array();
        $_SESSION['panier']['prixProduit'] = array();
@@ -278,4 +279,99 @@ function creationPanier() {
     return true;
  }
 
- // dans cette fonction 
+ // Dans cette fonction on ajoute un produit dans le panier du client, on entre l'id du produit, la quantité du produit et le prix du produit
+ function ajouterArticle($idProduit, $libelleProduit,$qteProduit,$prixProduit) {
+
+    //Si le panier existe
+    if (creationPanier() && !isVerrouille())
+    {
+       //Si le produit existe déjà on ajoute seulement la quantité
+       $positionProduit = array_search($libelleProduit,  $_SESSION['panier']['libelleProduit']);
+ 
+       if ($positionProduit !== false)
+       {
+          $_SESSION['panier']['qteProduit'][$positionProduit] += $qteProduit ;
+       }
+       else
+       {
+          //Sinon on ajoute le produit
+          array_push( $_SESSION['panier']['idProduit'],$idProduit);
+          array_push( $_SESSION['panier']['libelleProduit'],$libelleProduit);
+          array_push( $_SESSION['panier']['qteProduit'],$qteProduit);
+          array_push( $_SESSION['panier']['prixProduit'],$prixProduit);
+       }
+    }
+ }
+
+ // Dans cette fonction on supprime un produit du panier 
+ function supprimerArticle($libelleProduit) {
+    //Si le panier existe
+    if (creationPanier() && !isVerrouille())
+    {
+       //Nous allons passer par un panier temporaire
+       $tmp=array();
+       $tmp['idProduit'] = array();
+       $tmp['libelleProduit'] = array();
+       $tmp['qteProduit'] = array();
+       $tmp['prixProduit'] = array();
+       $tmp['verrou'] = $_SESSION['panier']['verrou'];
+ 
+       for($i = 0; $i < count($_SESSION['panier']['libelleProduit']); $i++)
+       {
+          if ($_SESSION['panier']['libelleProduit'][$i] !== $libelleProduit)
+          {
+             array_push( $tmp['idProduit'],$_SESSION['panier']['idProduit'][$i]);
+             array_push( $tmp['libelleProduit'],$_SESSION['panier']['libelleProduit'][$i]);
+             array_push( $tmp['qteProduit'],$_SESSION['panier']['qteProduit'][$i]);
+             array_push( $tmp['prixProduit'],$_SESSION['panier']['prixProduit'][$i]);
+          }
+ 
+       }
+       //On remplace le panier en session par notre panier temporaire à jour
+       $_SESSION['panier'] =  $tmp;
+       //On efface notre panier temporaire
+       unset($tmp);
+    }
+ }
+
+ // Dans cette fonction on modifie un article dans le panier 
+ function modifierQTeArticle($libelleProduit,$qteProduit) {
+    //Si le panier existe
+    if (creationPanier() && !isVerrouille())
+    {
+       //Si la quantité est positive on modifie sinon on supprime l'article
+       if ($qteProduit > 0)
+       {
+          //Recherche du produit dans le panier
+          $positionProduit = array_search($libelleProduit,  $_SESSION['panier']['libelleProduit']);
+ 
+          if ($positionProduit !== false)
+          {
+             $_SESSION['panier']['qteProduit'][$positionProduit] = $qteProduit ;
+          }
+       }
+       else
+       supprimerArticle($libelleProduit);
+    }
+ }
+
+ // Dans cette fonction on vérifie l'état du verrou du panier
+ function isVerrouille() {
+    if (isset($_SESSION['panier']) && $_SESSION['panier']['verrou'])
+    return true;
+    else
+    return false;
+ }
+
+ // Dans cette fonction on compte le nombre d'articles présent dans la panier
+ function compterArticles() {
+   if (isset($_SESSION['panier']))
+   return count($_SESSION['panier']['libelleProduit']);
+   else
+   return 0;
+}
+
+// Dans cette fonction on supprime le panier du client
+function supprimePanier() {
+    unset($_SESSION['panier']);
+}

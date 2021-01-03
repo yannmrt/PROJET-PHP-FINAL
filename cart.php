@@ -54,6 +54,22 @@ require_once("php/function.php");
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            <?php if (creationPanier()) {
+                                                     $nbArticles=count($_SESSION['panier']['libelleProduit']); 
+                                                     if($nbArticles <= 0) {
+                                                         echo "<tr><td>Le panier est vide</td></tr>";
+                                                     } else {
+
+                                                        for ($i=0 ;$i < $nbArticles ; $i++) {
+
+                                                            echo "<tr>";
+                                                            echo '<td><img src="images/produit/'.htmlspecialchars($_SESSION['panier']['idProduit'][$i]).'.jpg" class="img-fluid">'.htmlspecialchars($_SESSION['panier']['libelleProduit'][$i]).'</td>';
+                                                            echo '<td>'.htmlspecialchars($_SESSION['panier']['prixProduit'][$i]).'</td>';
+                                                            echo '<td><input type="number" name=\"q[]\"  min="1" value="'.htmlspecialchars($_SESSION['panier']['qteProduit'][$i]).'"></td>';
+                                                            echo '<td><a href=""><button class="btn btn-link text-danger"><i class="fas fa-times"></i></button></a></td>'                                                           
+                                                        }
+                                                     }
+                                            ?>
                                             <tr>
                                                 <td>
                                                     <img src="images/image-2.jpg" class="img-fluid">
@@ -67,24 +83,6 @@ require_once("php/function.php");
                                                 </td>
                                                 <td>
                                                     $1,500
-                                                </td>
-                                                <td>
-                                                    <button class="btn btn-link text-danger"><i class="fas fa-times"></i></button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="images/image-3.jpg" class="img-fluid">
-                                                    HP Envy Specter 360
-                                                </td>
-                                                <td>
-                                                    $2,500
-                                                </td>
-                                                <td>
-                                                    <input type="number" min="1" value="1">
-                                                </td>
-                                                <td>
-                                                    $2,500
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-link text-danger"><i class="fas fa-times"></i></button>
