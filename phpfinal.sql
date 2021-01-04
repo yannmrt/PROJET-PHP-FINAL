@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb4+deb9u2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
--- Client :  localhost:3306
--- Généré le :  Mar 15 Décembre 2020 à 17:05
+-- Hôte : localhost:3306
+-- Généré le : lun. 04 jan. 2021 à 20:03
 -- Version du serveur :  10.1.47-MariaDB-0+deb9u1
--- Version de PHP :  7.0.33-0+deb9u10
+-- Version de PHP : 7.3.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `phpfinal`
+-- Base de données : `kbwyoyxi_projetphp`
 --
 
 -- --------------------------------------------------------
@@ -43,19 +44,17 @@ CREATE TABLE `deliveryAdress` (
 CREATE TABLE `feedbackProduct` (
   `idFeedbackProduct` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
-  `note` int(11) NOT NULL,
+  `note` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `idProduct` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `feedbackProduct`
+-- Déchargement des données de la table `feedbackProduct`
 --
 
 INSERT INTO `feedbackProduct` (`idFeedbackProduct`, `idUser`, `note`, `description`, `idProduct`) VALUES
-(1, 1, 1, 'zfeef', 1),
-(2, 1, 4, 'ytyututy', 1),
-(3, 1, 1, 'hk,h,', 1);
+(1, 1, '3', 'Taille parfait', 6);
 
 -- --------------------------------------------------------
 
@@ -67,18 +66,25 @@ CREATE TABLE `product` (
   `idProduct` int(11) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `vendeur` varchar(255) NOT NULL,
+  `idCategory` int(11) NOT NULL,
   `prix` int(11) NOT NULL,
-  `idProductCategory` int(11) NOT NULL,
   `description` text NOT NULL,
   `descriptionFull` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `product`
+-- Déchargement des données de la table `product`
 --
 
-INSERT INTO `product` (`idProduct`, `nom`, `vendeur`, `prix`, `idProductCategory`, `description`, `descriptionFull`) VALUES
-(1, 'Appareil photo', 'Canon', 1000, 1, '<li>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</li>', '<h4>OPERATING SYSTEM</h4>\r\n\r\n                                            <p><strong>Available with Windows 10 Home:</strong> Gaming is better than ever on Windows 10, with games in 4K, DirectX 12, and streaming your gameplay*.</p>');
+INSERT INTO `product` (`idProduct`, `nom`, `vendeur`, `idCategory`, `prix`, `description`, `descriptionFull`) VALUES
+(1, 'Mac', 'Apple', 1, 1500, 'Ordinateur 13 pouces', 'Le Mac est un ordinateur'),
+(2, 'Appareil photo ', 'Sony', 1, 1000, 'Appareil Sony ', 'L\'appareil photo Sony est le meilleur du marché'),
+(3, 'TV', 'Philips', 1, 2000, '', ''),
+(4, 'Imprimente', 'HP', 1, 50, '', ''),
+(5, 'T-shirt', 'Zara', 2, 19, '', ''),
+(6, 'PullOver', 'Jules', 2, 45, '', ''),
+(7, 'Sarouel', 'Kiabi', 2, 15, '', ''),
+(8, 'Doudoune', 'Guess', 2, 150, '', '');
 
 -- --------------------------------------------------------
 
@@ -93,7 +99,7 @@ CREATE TABLE `productCategory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Contenu de la table `productCategory`
+-- Déchargement des données de la table `productCategory`
 --
 
 INSERT INTO `productCategory` (`idProductCategory`, `nom`, `nombreDeProduit`) VALUES
@@ -115,23 +121,25 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Contenu de la table `user`
+-- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`idUser`, `nom`, `prenom`, `email`, `mdp`) VALUES
 (1, 'martin', 'yann', 'ymartin@la-providence.net', 'd404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db'),
 (4, 'Pesant', 'Valetin', 'pvalentin@la-providence.net', 'd404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db'),
-(5, 'Martel', 'Vincent', 'vmartek@gmail.com', 'd404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db');
+(5, 'Martel', 'Vincent', 'vmartek@gmail.com', 'd404559f602eab6fd602ac7680dacbfaadd13630335e951f097af3900e9de176b6db28512f2e000b9d04fba5133e8b1c6e8df59db3a8ab9d60be4b97cc9e81db'),
+(6, 'Pesant', 'Valentin', 'Valentin.pesant@outlook.fr', 'e05af1399f4f4beb7934c9f12ba5a9c88f7ee1e8ef3fe7a167be4b979c515d24102ad90d3a0754d48fc5930f6369a3087e686e9732ef3460e6439a95089b4800');
 
 --
--- Index pour les tables exportées
+-- Index pour les tables déchargées
 --
 
 --
 -- Index pour la table `deliveryAdress`
 --
 ALTER TABLE `deliveryAdress`
-  ADD PRIMARY KEY (`idDeliveryAdress`);
+  ADD PRIMARY KEY (`idDeliveryAdress`),
+  ADD KEY `idUser` (`idUser`);
 
 --
 -- Index pour la table `feedbackProduct`
@@ -143,7 +151,8 @@ ALTER TABLE `feedbackProduct`
 -- Index pour la table `product`
 --
 ALTER TABLE `product`
-  ADD PRIMARY KEY (`idProduct`);
+  ADD PRIMARY KEY (`idProduct`),
+  ADD KEY `idCategory` (`idCategory`);
 
 --
 -- Index pour la table `productCategory`
@@ -158,7 +167,7 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`idUser`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
@@ -166,26 +175,32 @@ ALTER TABLE `user`
 --
 ALTER TABLE `deliveryAdress`
   MODIFY `idDeliveryAdress` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `feedbackProduct`
 --
 ALTER TABLE `feedbackProduct`
-  MODIFY `idFeedbackProduct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idFeedbackProduct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT pour la table `product`
 --
 ALTER TABLE `product`
-  MODIFY `idProduct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idProduct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT pour la table `productCategory`
 --
 ALTER TABLE `productCategory`
   MODIFY `idProductCategory` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
